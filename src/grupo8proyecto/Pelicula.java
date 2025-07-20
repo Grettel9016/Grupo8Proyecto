@@ -13,18 +13,20 @@ public class Pelicula {
     private String titulo;
     private int duracion;  
     private Genero genero;
+    private Clasificacion clasificacion;
 
     // Constructores
     
     public Pelicula(){
     }
     
-    public Pelicula(String titulo, int duracion, Genero genero) {
+    public Pelicula(String titulo, int duracion, Genero genero, Clasificacion clasificacion) {
         this.titulo = titulo;
         this.duracion = duracion;
         this.genero = genero;
+        this.clasificacion= clasificacion;
     }
-    
+    //get
     public String getTitulo() {
         return titulo;
     }
@@ -35,6 +37,9 @@ public class Pelicula {
 
     public Genero getGenero() {
         return genero;
+    }
+    public Clasificacion getClasificacion() {
+        return clasificacion;
     }
 
     // Setters
@@ -49,13 +54,17 @@ public class Pelicula {
     public void setGenero(Genero genero) {
         this.genero = genero;
     }
-   
-    public void mostrarFichaTecnica() {
-        String ficha = "Ficha Técnica:\n" +
-                       "Título: " + titulo + "\n" +
-                       "Duración: " + duracion + " minutos\n" +
-                       "Género: " + genero;
-        System.out.println(ficha);
+    public void setClasificacion(Clasificacion clasificacion) {
+        this.clasificacion = clasificacion;
     }
+   
+    public String mostrarFichaTecnica() {
+        return "Ficha Técnica:\n" +
+                "Título: " + titulo + "\n" +
+                "Duración: " + duracion + " minutos\n" +
+                "Género: " + genero+ "\n"+
+                "Clasificacion"+ clasificacion;
+    }
+
     
 }

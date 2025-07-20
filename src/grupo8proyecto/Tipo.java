@@ -9,5 +9,12 @@ package grupo8proyecto;
  * @author grett
  */
 public enum Tipo {
-    
+    Sala2D,
+    Sala3D,
+    Sala4D
+    SalaVIP,
+    SalaXD,
+    SalaMacro,
+    Doblada,
+    Subtitulada,
 }

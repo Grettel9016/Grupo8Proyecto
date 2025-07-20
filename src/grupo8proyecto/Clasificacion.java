@@ -9,5 +9,8 @@ package grupo8proyecto;
  * @author grett
  */
 public enum Clasificacion {
-    
+    TP,
+    TP12,
+    M18,
+    M15,
 }

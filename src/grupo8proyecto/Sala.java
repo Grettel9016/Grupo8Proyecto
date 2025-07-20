@@ -51,5 +51,13 @@ public class Sala {
     public void setFuncion(Funcion funcion){
         this.funcion=funcion;
     }
+    public void mostraSala(){
+        String infoSala= "Inforacion de la sala:" + "\n" +
+                       "Numero: " + numero + "\n" +
+                       "Tipo: " + tipo +"\n"+
+                       "Capacidad: " + capacidad+ "\n"+
+                       "Capacidad"+ capacidad;
+                       
+    }
     
 }

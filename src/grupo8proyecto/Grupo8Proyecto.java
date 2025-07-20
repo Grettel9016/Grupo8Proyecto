@@ -39,13 +39,52 @@ public class Grupo8Proyecto {
             switch (opcion) {
                 case 1:
                     JOptionPane.showMessageDialog(null, "Mostrando cartelera.");
-                    //llamar el metodo
+                    //llamar metodo
                     break;
                 case 2:
                     JOptionPane.showMessageDialog(null, "Proceso de compra iniciado.");
+                    String subCompra = JOptionPane.showInputDialog(
+                            "===== COMPRAR ENTRADAS =====\n" +
+                            "Seleccione una opción:\n" +
+                            "1. Seleccionar película\n" +
+                            "2. Seleccionar asiento\n" +
+                            "3. Confirmar compra\n" +
+                            "0. Volver al menú principal");
+
+                    if (subCompra != null && subCompra.matches("\\d")) {
+                        int opcionCompra = Integer.parseInt(subCompra);
+                        switch (opcionCompra) {
+                            case 1 -> JOptionPane.showMessageDialog(null, "Seleccionando película...");
+                            case 2 -> JOptionPane.showMessageDialog(null, "Seleccionando asiento...");
+                            case 3 -> JOptionPane.showMessageDialog(null, "Compra confirmada.");
+                            case 0 -> JOptionPane.showMessageDialog(null, "Volviendo al menú principal.");
+                            default -> JOptionPane.showMessageDialog(null, "Opción inválida.");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Entrada inválida.");
+                    }
                     break;
                 case 3:
                     JOptionPane.showMessageDialog(null, "Accediendo a administración.");
+                    String subAdmin = JOptionPane.showInputDialog(
+                            "Seleccione una opción:\n" +
+                            "1. Registrar película\n" +
+                            "2. Registrar sala\n" +
+                            "3. Programar función\n" +
+                            "0. Volver al menú principal");
+
+                    if (subAdmin != null && subAdmin.matches("\\d")) {
+                        int opcionAdmin = Integer.parseInt(subAdmin);
+                        switch (opcionAdmin) {
+                            case 1 -> JOptionPane.showMessageDialog(null, "Registrando nueva película...");
+                            case 2 -> JOptionPane.showMessageDialog(null, "Registrando nueva sala...");
+                            case 3 -> JOptionPane.showMessageDialog(null, "Programando función...");
+                            case 0 -> JOptionPane.showMessageDialog(null, "Volviendo al menú principal.");
+                            default -> JOptionPane.showMessageDialog(null, "Opción inválida.");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Entrada inválida.");
+                    }
                     break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "Gracias por usar el sistema.");
