@@ -19,11 +19,11 @@ public class Grupo8Proyecto {
         // menu
         String entrada = JOptionPane.showInputDialog(
                 "===== MENÚ PRINCIPAL =====\n" +
+                "Seleccione una opción:\n"+
                 "1. Ver Cartelera\n" +
                 "2. Comprar Entradas\n" +
                 "3. Funciones Administrativas\n" +
-                "0. Salir\n" +
-                "Seleccione una opción:");
+                "0. Salir");
       
         boolean esNumero = true;
         for (int i = 0; i < entrada.length(); i++) {
@@ -38,14 +38,14 @@ public class Grupo8Proyecto {
 
             switch (opcion) {
                 case 1:
-                    JOptionPane.showMessageDialog(null, "Mostrando cartelera...");
+                    JOptionPane.showMessageDialog(null, "Mostrando cartelera.");
                     //llamar el metodo
                     break;
                 case 2:
-                    JOptionPane.showMessageDialog(null, "Proceso de compra iniciado...");
+                    JOptionPane.showMessageDialog(null, "Proceso de compra iniciado.");
                     break;
                 case 3:
-                    JOptionPane.showMessageDialog(null, "Accediendo a administración...");
+                    JOptionPane.showMessageDialog(null, "Accediendo a administración.");
                     break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "Gracias por usar el sistema.");

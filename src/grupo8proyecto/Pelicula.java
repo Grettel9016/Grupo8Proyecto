@@ -12,14 +12,14 @@ public class Pelicula {
     // Atributos
     private String titulo;
     private int duracion;  
-    private String genero;
+    private Genero genero;
 
     // Constructores
     
     public Pelicula(){
     }
     
-    public Pelicula(String titulo, int duracion, String genero) {
+    public Pelicula(String titulo, int duracion, Genero genero) {
         this.titulo = titulo;
         this.duracion = duracion;
         this.genero = genero;
@@ -33,7 +33,7 @@ public class Pelicula {
         return duracion;
     }
 
-    public String getGenero() {
+    public Genero getGenero() {
         return genero;
     }
 
@@ -46,7 +46,7 @@ public class Pelicula {
         this.duracion = duracion;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(Genero genero) {
         this.genero = genero;
     }
    
