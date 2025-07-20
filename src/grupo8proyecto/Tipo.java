@@ -11,7 +11,7 @@ package grupo8proyecto;
 public enum Tipo {
     Sala2D,
     Sala3D,
-    Sala4D
+    Sala4D,
     SalaVIP,
     SalaXD,
     SalaMacro,
