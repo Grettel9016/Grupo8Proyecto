@@ -12,10 +12,10 @@ public class Boletos {
     private String codigo;
     private Funcion funcion;
     private Cliente cliente;
-    private String asiento;
+    private int asiento;
     private double precio;
     
-    public Boletos (String codigo, Funcion funcion, Cliente cliente, String asiento, double precio){
+    public Boletos (String codigo, Funcion funcion, Cliente cliente, int asiento, double precio){
         this.codigo = codigo;
         this.funcion = funcion;
         this.cliente = cliente;
@@ -35,7 +35,7 @@ public class Boletos {
         return cliente;
     }
 
-    public String getAsiento() {
+    public int getAsiento() {
         return asiento;
     }
 
@@ -56,7 +56,7 @@ public class Boletos {
         this.cliente = cliente;
     }
 
-    public void setAsiento(String asiento) {
+    public void setAsiento(int asiento) {
         this.asiento = asiento;
     }
 
@@ -67,11 +67,11 @@ public class Boletos {
     // Mostrar detalle del boleto
     public String mostrarDetalleEntrada() {
         return "===== BOLETO =====\n" +
-               "Código: " + codigo + "\n" +
-               funcion.mostrarInfoFuncion()+ "\n" +
-               cliente.mostrarInfoCliente()+ "\n" +
+               "CÃ³digo: " + codigo + "\n" +
+               funcion.mostrarFuncion()+ "\n" +
+               cliente.mostrarCliente()+ "\n" +
                "Asiento: " + asiento + "\n" +
-               "Precio: ₡" + precio;
+               "Precio: â‚¡" + precio;
     }
     
     
