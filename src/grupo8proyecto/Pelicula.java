@@ -4,10 +4,8 @@
  */
 package grupo8proyecto;
 
-/**
- *
- * @author grett
- */
+///**
+
 public class Pelicula {
     // Atributos
     private String titulo;
