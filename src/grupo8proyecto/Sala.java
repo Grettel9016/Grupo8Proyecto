@@ -10,53 +10,38 @@ package grupo8proyecto;
  */
 public class Sala {
     private int numero;
-    private double capacidad;
-    private Tipo tipo;
-    public Funcion funcion;
+    private int capacidad;
     
     //contructores
     public Sala(){
         
     }
     
-    public Sala(int numero,double capacidad, Tipo tipo, Funcion funcion){
+    public Sala(int numero,int capacidad){
         this.numero=numero;
         this.capacidad= capacidad;
-        this.tipo= tipo;
-        this.funcion= funcion;
+
     }
     
     public int getNumero() {
         return numero;
     }
     
-    public double getCapacidad(){
+    public int getCapacidad(){
         return capacidad;
     }
-    public Tipo getTipo(){
-        return tipo;
-    }
-    public Funcion getFuncion(){
-        return funcion;
-    }  
+   
     public void setNumero(int numero) {
         this.numero = numero;
     }
-    public void setCapacidad(double capacidad){
+    public void setCapacidad(int capacidad){
         this.capacidad= capacidad;
     }
-    public void setTipo(Tipo tipo){
-        this.tipo=tipo;
-    }
-    public void setFuncion(Funcion funcion){
-        this.funcion=funcion;
-    }
-    public void mostraSala(){
-        String infoSala= "Inforacion de la sala:" + "\n" +
-                       "Numero: " + numero + "\n" +
-                       "Tipo: " + tipo +"\n"+
-                       "Capacidad: " + capacidad+ "\n"+
-                       "Capacidad"+ capacidad;
+ 
+    public String mostrarSala(){
+        return "Informacion de la sala: \n" +
+                "Numero: " + numero + "\n" +
+                "Capacidad: " + capacidad+ "asientos";
                        
     }
     
