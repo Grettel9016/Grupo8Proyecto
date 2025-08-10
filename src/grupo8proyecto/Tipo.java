@@ -15,6 +15,5 @@ public enum Tipo {
     SalaVIP,
     SalaXD,
     SalaMacro,
-    Doblada,
-    Subtitulada,
 }
+
