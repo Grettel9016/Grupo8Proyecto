@@ -161,20 +161,19 @@ public class Grupo8Proyecto {
                     JOptionPane.showMessageDialog(null, "Asiento seleccionado: " + asientoSeleccionado);
                     break;
                 }
-            case 3: { // Confirmar compra (sin validar existencia de cédula)
+            case 3: { 
                 if (funcionSeleccionada == 0) {
                     JOptionPane.showMessageDialog(null, "Falta seleccionar la función.");
                     break;
                 }
 
-                // 1) Pedir cédula (no validar existencia: si no existe, se crea)
+                // 1) Cédula (sin validar existencia: si no está, se crea "Invitado")
                 String cedula = JOptionPane.showInputDialog("Cédula del cliente:");
                 if (cedula == null || cedula.trim().isEmpty()) break;
 
                 int indiceCliente = cine.buscarClientePorCedula(cedula);
                 if (indiceCliente == -1) {
-                    // No validar → registrar automáticamente
-                    Cliente auto = new Cliente("Invitado", cedula.trim(), "", 18); // edad 18 para pasar M18
+                    Cliente auto = new Cliente("Invitado", cedula.trim(), "", 18);
                     if (!cine.agregarCliente(auto)) {
                         JOptionPane.showMessageDialog(null, "No hay espacio para nuevos clientes.");
                         break;
@@ -182,7 +181,7 @@ public class Grupo8Proyecto {
                     indiceCliente = cine.getCantClientes() - 1;
                 }
 
-                // 2) Cantidad
+                // 2) Cantidad de boletos (entero)
                 String entradaCantidad = JOptionPane.showInputDialog("Cantidad de boletos:");
                 if (entradaCantidad == null || !esNumero(entradaCantidad)) {
                     JOptionPane.showMessageDialog(null, "Cantidad inválida.");
@@ -201,64 +200,76 @@ public class Grupo8Proyecto {
                     break;
                 }
 
-                // 3) Precio unitario automático por función
+                // 3) Precio unitario automático desde el sistema (nada de pedir precio)
                 double precioUnitario = cine.obtenerPrecioUnitario(idxFuncion);
                 if (precioUnitario <= 0) {
                     JOptionPane.showMessageDialog(null, "Precio no disponible para esta función.");
                     break;
                 }
 
-                // 4) Emisión de boletos
-                StringBuilder resumen = new StringBuilder();
+                // 4) Emitir boletos pidiendo asientos uno a uno (sin usar arreglos aquí)
+                String resumen = "";
                 double total = 0.0;
 
+                // Si ya había asiento seleccionado y cantidad=1, úsalo
                 if (cantidad == 1 && asientoSeleccionado != 0) {
                     Boletos boleto = cine.confirmarCompra(idxFuncion, asientoSeleccionado, indiceCliente, precioUnitario);
                     if (boleto == null) {
-                        JOptionPane.showMessageDialog(null, "No se pudo completar la compra (verifique clasificación/asiento).");
+                        JOptionPane.showMessageDialog(null, "No se pudo completar la compra (clasificación/asiento).");
                         break;
                     }
-                    resumen.append(boleto.mostrarDetalleEntrada()).append("\n");
-                    total += precioUnitario;
+                    resumen = resumen + boleto.mostrarDetalleEntrada() + "\n";
+                    total = total + precioUnitario;
                 } else {
                     int capacidad = funcion.getSala().getCapacidad();
+                    boolean error = false;
+
                     for (int k = 1; k <= cantidad; k++) {
-                        String entradaAsiento = JOptionPane.showInputDialog("Asiento #" + k + " (1.." + capacidad + "):");
+                        String entradaAsiento = JOptionPane.showInputDialog(
+                            "Asiento #" + k + " (1.." + capacidad + "):"
+                        );
                         if (entradaAsiento == null || !esNumero(entradaAsiento)) {
                             JOptionPane.showMessageDialog(null, "Asiento inválido. Se cancela la compra.");
+                            error = true;
                             break;
                         }
                         int numAsiento = Integer.parseInt(entradaAsiento);
                         if (numAsiento < 1 || numAsiento > capacidad) {
                             JOptionPane.showMessageDialog(null, "Asiento fuera de rango. Se cancela la compra.");
+                            error = true;
                             break;
                         }
 
                         Boletos boleto = cine.confirmarCompra(idxFuncion, numAsiento, indiceCliente, precioUnitario);
                         if (boleto == null) {
                             JOptionPane.showMessageDialog(null, "No se pudo reservar el asiento " + numAsiento + ". Se cancela la compra.");
+                            error = true;
                             break;
                         }
-                        resumen.append(boleto.mostrarDetalleEntrada()).append("\n");
-                        total += precioUnitario;
+
+                        resumen = resumen + boleto.mostrarDetalleEntrada() + "\n";
+                        total = total + precioUnitario;
                     }
+
+                    if (error) break;
                 }
 
                 if (resumen.length() > 0) {
-                    resumen.append("\nTotal a pagar: ").append(String.format("%.2f", total));
-                    JOptionPane.showMessageDialog(null, "Compra exitosa:\n" + resumen.toString());
+                    resumen = resumen + "\nTotal a pagar: " + String.format("%.2f", total);
+                    JOptionPane.showMessageDialog(null, "Compra exitosa:\n" + resumen);
                     funcionSeleccionada = 0;
                     asientoSeleccionado = 0;
                 }
                 break;
-                }
-            case 0:{
-                return;}
+            }
+            case 0:
+                return;
             default:
-            JOptionPane.showMessageDialog(null, "Opción no válida.");
+                JOptionPane.showMessageDialog(null, "Opción no válida.");
             }
         }
     }
 }
 
 
+    
