@@ -183,16 +183,14 @@ public class Grupo8Proyecto {
         int duracion = Integer.parseInt(duracionStr);
         
         // Géneros disponibles
-        String generos = listarOpciones(Genero.values());
         String generoStr = JOptionPane.showInputDialog(
-            "Género (" + generos + "):");
+        "Género (Accion, CienciaFiccion, Comedia, Romantica, Terror, Drama, Animada, Familiar):");
         try {
             Genero genero = Genero.valueOf(generoStr);
             
             // Clasificaciones disponibles
-            String clasifs = listarOpciones(Clasificacion.values());
             String clasifStr = JOptionPane.showInputDialog(
-                "Clasificación (" + clasifs + "):");
+        "Clasificación (TP, TP12, M15, M18):");
             Clasificacion clasificacion = Clasificacion.valueOf(clasifStr);
             
             Pelicula nueva = new Pelicula(titulo, duracion, genero, clasificacion);
@@ -222,9 +220,8 @@ public class Grupo8Proyecto {
         int capacidad = Integer.parseInt(capStr);
         
         // Tipos de sala
-        String tipos = listarOpciones(Tipo.values());
         String tipoStr = JOptionPane.showInputDialog(
-            "Tipo de sala (" + tipos + "):");
+        "Tipo de sala (Sala2D, Sala3D, Sala4D, SalaVIP, SalaXD, SalaMacro, Doblada, Subtitulada):");
         try {
             Tipo tipo = Tipo.valueOf(tipoStr);
             
@@ -277,9 +274,8 @@ public class Grupo8Proyecto {
         }
         
         // Seleccionar tipo de función
-        String tipos = listarOpciones(Tipo.values());
         String tipoStr = JOptionPane.showInputDialog(
-            "Tipo de función (" + tipos + "):");
+        "Tipo de función (Sala2D, Sala3D, Sala4D, SalaVIP, SalaXD, SalaMacro, Doblada, Subtitulada):");
         try {
             Tipo tipo = Tipo.valueOf(tipoStr);
             
@@ -320,13 +316,17 @@ public class Grupo8Proyecto {
     }
 
     // Métodos auxiliares
-    private static String listarOpciones(Enum<?>[] valores) {
-        StringBuilder sb = new StringBuilder();
-        for (Enum<?> valor : valores) {
-            sb.append(valor.name()).append(", ");
-        }
-        return sb.substring(0, sb.length()-2);
-    }
+    private static String listarOpcionesGenero() {
+    return "Accion, CienciaFiccion, Comedia, Romantica, Terror, Drama, Animada, Familiar";
+}
+
+private static String listarOpcionesClasificacion() {
+    return "TP, TP12, M15, M18";
+}
+
+private static String listarOpcionesTipo() {
+    return "Sala2D, Sala3D, Sala4D, SalaVIP, SalaXD, SalaMacro, Doblada, Subtitulada";
+}
 
     private static boolean esNumero(String str) {
         try {
@@ -335,5 +335,9 @@ public class Grupo8Proyecto {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    private static String listarOpciones(Genero[] values) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
