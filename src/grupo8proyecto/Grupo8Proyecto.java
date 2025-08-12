@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
@@ -38,16 +39,18 @@ public class Grupo8Proyecto {
         cine.agregarPelicula(new Pelicula("Los 4 Fantasticos", 93, Genero.CienciaFiccion, Clasificacion.TP));
         cine.agregarPelicula(new Pelicula("Tipos malos2", 87, Genero.Animada, Clasificacion.TP));
         cine.agregarPelicula(new Pelicula("Shadow Force", 87, Genero.Accion, Clasificacion.M18));
-        cine.agregarSala(new Sala(1, 50));
-        cine.agregarSala(new Sala(2, 30));
+        cine.agregarSala(new Sala(0, 50));
+        cine.agregarSala(new Sala(1, 30));
+        cine.agregarSala(new Sala(2, 100));
         // cliente para poder comprar de una vez
         cine.agregarCliente(new Cliente("Maria Solis", "102340568", "maria@mail.com", 20));
         cine.agregarCliente(new Cliente("Carlos Gomez", "304560789", "carlos@mail.com", 17));
         // funciones base (usa las pelis y salas precargadas)
 
         
-        cine.agregarFuncion(new Funcion("10-08-2025","18:30",cine.getPelicula(0),cine.getSala(0),true,Tipo.Sala2D));
-        cine.agregarFuncion(new Funcion("10-08-2025","20:00",cine.getPelicula(1),cine.getSala(1),true,Tipo.SalaVIP));
+        cine.agregarFuncion(new Funcion("13-08-2025","18:30",cine.getPelicula(0),cine.getSala(0),true,Tipo.Sala2D));
+        cine.agregarFuncion(new Funcion("13-08-2025","20:00",cine.getPelicula(1),cine.getSala(1),true,Tipo.SalaVIP));
+        cine.agregarFuncion(new Funcion("13-08-2025","15:00",cine.getPelicula(1),cine.getSala(1),true,Tipo.Sala3D));
         
        
         
@@ -103,8 +106,7 @@ public class Grupo8Proyecto {
                 "====== COMPRAR ENTRADAS ======\n" +
                 estado + "\n\n" +
                 "1. Seleccionar película/función\n" +
-                "2. Seleccionar asiento\n" +
-                "3. Confirmar compra\n" +
+                "2. Confirmar compra\n" +
                 "0. Volver"
             );
 
@@ -134,34 +136,7 @@ public class Grupo8Proyecto {
                     JOptionPane.showMessageDialog(null, "Función seleccionada: #" + funcionSeleccionada);
                     break;
                 }
-                case 2: { // Elegir asiento
-                    if (funcionSeleccionada == 0) {
-                        JOptionPane.showMessageDialog(null, "Primero seleccione la función (opción 1).");
-                        break;
-                    }
-                    Funcion funcion = cine.getFuncion(funcionSeleccionada - 1);
-                    int capacidad = funcion.getSala().getCapacidad();
-
-                    String entradaAsiento = JOptionPane.showInputDialog("Asiento (1.." + capacidad + "):");
-                    if (entradaAsiento == null || !esNumero(entradaAsiento)) break;
-
-                    int numeroAsiento = Integer.parseInt(entradaAsiento); // 1..capacidad
-                    if (numeroAsiento < 1 || numeroAsiento > capacidad) {
-                        JOptionPane.showMessageDialog(null, "Asiento fuera de rango.");
-                        break;
-                    }
-
-                    boolean ocupado = funcion.getAsientos()[numeroAsiento - 1];
-                    if (ocupado) {
-                        JOptionPane.showMessageDialog(null, "Asiento ocupado.");
-                        break;
-                    }
-
-                    asientoSeleccionado = numeroAsiento;
-                    JOptionPane.showMessageDialog(null, "Asiento seleccionado: " + asientoSeleccionado);
-                    break;
-                }
-            case 3: { 
+            case 2: { 
                 if (funcionSeleccionada == 0) {
                     JOptionPane.showMessageDialog(null, "Falta seleccionar la función.");
                     break;
@@ -270,6 +245,3 @@ public class Grupo8Proyecto {
         }
     }
 }
-
-
-    
