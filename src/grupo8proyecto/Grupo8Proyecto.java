@@ -141,7 +141,6 @@ public class Grupo8Proyecto {
                     JOptionPane.showMessageDialog(null, "Falta seleccionar la función.");
                     break;
                 }
-
                 // 1) Cédula (sin validar existencia: si no está, se crea "Invitado")
                 String cedula = JOptionPane.showInputDialog("Cédula del cliente:");
                 if (cedula == null || cedula.trim().isEmpty()) break;
