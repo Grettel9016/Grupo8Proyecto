@@ -141,20 +141,61 @@ public class Grupo8Proyecto {
                     JOptionPane.showMessageDialog(null, "Falta seleccionar la función.");
                     break;
                 }
-                // 1) Cédula (sin validar existencia: si no está, se crea "Invitado")
+
+                // 1) Cédula (si no está, se crea cliente nuevo pidiendo NOMBRE y EDAD)
                 String cedula = JOptionPane.showInputDialog("Cédula del cliente:");
                 if (cedula == null || cedula.trim().isEmpty()) break;
 
                 int indiceCliente = cine.buscarClientePorCedula(cedula);
                 if (indiceCliente == -1) {
-                    Cliente auto = new Cliente("Invitado", cedula.trim(), "", 18);
-                    if (!cine.agregarCliente(auto)) {
+                    String nombre = JOptionPane.showInputDialog("Nombre del cliente (dejar vacío para 'Invitado'):");
+                    if (nombre == null) break;
+                    if (nombre.trim().isEmpty()) {
+                        nombre = "Invitado";
+                    }
+
+                    String entradaEdad = JOptionPane.showInputDialog("Edad del cliente (en años):");
+                    if (entradaEdad == null || !esNumero(entradaEdad)) {
+                        JOptionPane.showMessageDialog(null, "Edad inválida.");
+                        break;
+                    }
+                    int edad = Integer.parseInt(entradaEdad);
+                    if (edad < 0 || edad > 120) {
+                        JOptionPane.showMessageDialog(null, "Edad fuera de rango.");
+                        break;
+                    }
+
+                    Cliente nuevo = new Cliente(nombre, cedula.trim(), "", edad);
+                    if (!cine.agregarCliente(nuevo)) {
                         JOptionPane.showMessageDialog(null, "No hay espacio para nuevos clientes.");
                         break;
                     }
                     indiceCliente = cine.getCantClientes() - 1;
                 }
+                
+                // VALIDACIÓN DE EDAD ANTES DE COMPRAR
+                int idxFuncion = funcionSeleccionada - 1;    
+                Funcion funcion = cine.getFuncion(idxFuncion);
+                if (funcion == null) {                        
+                    JOptionPane.showMessageDialog(null, "Función inválida.");
+                    break;
+                }
+                
+                Cliente cliente = cine.getCliente(indiceCliente);
+                int edadMinima = cine.edadMinimaPorClasificacion(
+                    funcion.getPelicula().getClasificacion()
+                );
 
+                if (cliente.getEdad() < edadMinima) {
+                    JOptionPane.showMessageDialog(null,
+                        "No se puede completar la compra.\n" +
+                        "Clasificación: " + funcion.getPelicula().getClasificacion() + "\n" +
+                        "Edad mínima requerida: " + edadMinima + " años\n" +
+                        "Edad del cliente: " + cliente.getEdad() + " años"
+                    );
+                    break; // salir sin comprar
+                }
+    
                 // 2) Cantidad de boletos (entero)
                 String entradaCantidad = JOptionPane.showInputDialog("Cantidad de boletos:");
                 if (entradaCantidad == null || !esNumero(entradaCantidad)) {
@@ -167,12 +208,7 @@ public class Grupo8Proyecto {
                     break;
                 }
 
-                int idxFuncion = funcionSeleccionada - 1;
-                Funcion funcion = cine.getFuncion(idxFuncion);
-                if (funcion == null) {
-                    JOptionPane.showMessageDialog(null, "Función inválida.");
-                    break;
-                }
+
 
                 // 3) Precio unitario automático desde el sistema (nada de pedir precio)
                 double precioUnitario = cine.obtenerPrecioUnitario(idxFuncion);
@@ -192,7 +228,7 @@ public class Grupo8Proyecto {
                         JOptionPane.showMessageDialog(null, "No se pudo completar la compra (clasificación/asiento).");
                         break;
                     }
-                    resumen = resumen + boleto.mostrarDetalleEntrada() + "\n";
+                    resumen= resumen + boleto.mostrarDetalleEntrada() + "\n";
                     total = total + precioUnitario;
                 } else {
                     int capacidad = funcion.getSala().getCapacidad();
