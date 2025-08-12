@@ -66,12 +66,12 @@ public class Boletos {
     
     // Mostrar detalle del boleto
     public String mostrarDetalleEntrada() {
-        return "===== BOLETO =====\n" +
-               "CÃ³digo: " + codigo + "\n" +
+        return "BOLETO\n" +
+               "Codigo: " + codigo + "\n" +
                funcion.mostrarFuncion()+ "\n" +
                cliente.mostrarCliente()+ "\n" +
                "Asiento: " + asiento + "\n" +
-               "Precio: â‚¡" + precio;
+               "Precio: " + precio;
     }
     
     
